@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  background-color: black;
+  position: sticky;
+}
+
+.header-title {
+  color: white;
+  margin-left: 20px;
+}
+
+.group {
+  display: flex;
+  overflow: auto;
+  padding-top: 10px;
+}
+
+.group-img {
+  width: 40rem;
+  height: 40rem;
+  margin: 5px;
+}
+
+.nav_list {
+  display: flex;
+  font-size: 30px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav_list:hover {
+  color: skyblue;
+  transition: all 250ms ease-out;
+  left: 0%;
+  width: 100%;
+  text-decoration: underline;
+}
