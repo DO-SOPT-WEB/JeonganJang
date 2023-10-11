@@ -59,6 +59,7 @@
   flex-wrap: wrap;
 }
 
+/* 두 번째 섹션 */
 .second_content_header {
   position: sticky;
   top: 0;
@@ -69,10 +70,25 @@
 }
 
 .house_image {
-  width: 30rem;
-  height: 30rem;
-  margin: 5px;
+  height: 31rem;
 }
+
+.house_image_all {
+  display: flex;
+  height: 100%;
+}
+
+.house_image_left {
+  width: 100%;
+  height: 100%;
+}
+
+.right_container {
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+/* 세 번째 섹션 */
 
 .third_content_header {
   position: sticky;
