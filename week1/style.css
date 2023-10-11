@@ -21,6 +21,11 @@
   margin: 5px;
 }
 
+.nav_title {
+  justify-content: center;
+  text-align: center;
+}
+
 .nav_list {
   display: flex;
   font-size: 30px;
