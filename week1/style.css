@@ -42,3 +42,18 @@
   width: 100%;
   text-decoration: underline;
 }
+
+.first_content_header {
+  position: sticky;
+  top: 0; /* 화면 맨 위에 고정 */
+  background: skyblue;
+  padding: 10px;
+  justify-content: center;
+  z-index: 100; /* 다른 요소 위에 표시 */
+}
+
+.food_image {
+  width: 30rem;
+  height: 30rem;
+  margin: 5px;
+}
