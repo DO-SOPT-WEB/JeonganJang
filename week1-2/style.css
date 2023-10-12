@@ -16,8 +16,6 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 30px solid #0a6eff;
-  border-radius: 30px;
   width: 100%;
 }
 
@@ -72,7 +70,72 @@
 
 .pay_detail_list {
   display: flex;
+  justify-content: space-between;
+  border-bottom: 8px solid #4390e1;
+}
+
+.pay_detail_list > p {
+  font-weight: bold;
+}
+
+.pay_detail_contents {
+  width: 100%;
+  height: 500px;
+  overflow-x: hidden;
+}
+
+.pay_detail_item {
+  display: flex;
+  width: 100%;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 30px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  margin: 1%;
+  width: 96%;
+  border-radius: 30px;
+  background-color: rgb(221, 153, 248);
+}
+
+.pay_detail_btn {
+  display: flex;
+  border: none;
+}
+
+/* 사용 내역 컨텐츠 */
+.pay_detail_content {
+  font-weight: bold;
+}
+
+.pay_detail_amount_spend {
+  color: red;
+}
+
+.pay_detail_amount_income {
+  color: blue;
+}
+
+/* footer 부분 */
+
+.footer {
+  position: sticky;
+  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  width: 100%;
+}
+
+.footer_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
 }
