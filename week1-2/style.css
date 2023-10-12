@@ -1,0 +1,54 @@
+.header {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: skyblue;
+  border-radius: 20px;
+}
+
+.all_my_amount {
+  display: flex;
+  flex-direction: column;
+}
+
+.my_amount {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 30px solid #0a6eff;
+  border-radius: 30px;
+  width: 100%;
+}
+
+.my_amount_title {
+  font-size: 50px;
+  margin-bottom: 5px;
+  border-bottom: 8px solid #4390e1;
+}
+
+.my_amount_sub {
+  font-size: 30px;
+}
+
+.amount_detail_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  gap: 50px;
+}
+
+.amount_detail_plus_container,
+.amount_detail_minus_container {
+  text-align: center;
+  display: flex;
+}
+
+.amount_detail_plus_container {
+  color: blue;
+}
+
+.amount_detail_minus_container {
+  color: red;
+}
