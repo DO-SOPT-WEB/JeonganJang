@@ -52,3 +52,27 @@
 .amount_detail_minus_container {
   color: red;
 }
+
+/* 내역 리스트 */
+
+.pay_detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.date {
+  display: flex;
+}
+
+.date_btn {
+  margin: 20px;
+}
+
+.pay_detail_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
