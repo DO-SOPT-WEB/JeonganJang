@@ -57,6 +57,14 @@
   height: 30rem;
   margin: 5px;
   flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.food_image:hover {
+  transform: scale(1.1); /* 호버 시 이미지 확대 효과 */
+  filter: brightness(0.7); /* 호버 시 이미지 어둡게 만듦 */
 }
 
 /* 두 번째 섹션 */
