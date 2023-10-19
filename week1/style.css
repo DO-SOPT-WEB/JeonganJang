@@ -26,11 +26,17 @@
   text-align: center;
 }
 
-.nav_list a {
+.nav_list {
   display: flex;
   font-size: 30px;
   justify-content: space-around;
   align-items: center;
+
+  list-style: none;
+  padding-left: 0;
+}
+
+.nav_list a {
   text-decoration: none;
   color: inherit;
 }
@@ -148,7 +154,7 @@
 }
 
 /* footer 설정 */
-footer {
+.footer {
   text-align: center;
   font-size: 50px;
 }
