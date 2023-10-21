@@ -1,13 +1,17 @@
-const qs = (className) => {
-  return document.querySelector(className);
-};
+export function qs(className, target = document) {
+  if (!className) throw "no className";
+  return target.querySelector(className);
+}
 
-const qsAll = (className) => {
-  return document.querySelectorAll(className);
-};
+export function qsAll(className, target = document) {
+  if (!className) throw "no className";
+  return target.querySelectorAll(className);
+}
 
-const getId = (idName) => {
-  return document.getElementById(idName);
-};
+export function on(target, eventName, handler) {
+  target.addEventListener(eventName, handler);
+}
 
-export { qs, qsAll, getId };
+export function createNextId(list = []) {
+  return Math.max(...list.map((item) => item.id)) + 1;
+}
