@@ -38,7 +38,6 @@ const storage = {
       PRICE: "4000",
     },
   ],
-  INIT_BALANCE: 0,
 };
 
 export { storage, INIT_BALANCE };
