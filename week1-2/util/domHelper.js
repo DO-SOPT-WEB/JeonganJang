@@ -15,3 +15,8 @@ export function on(target, eventName, handler) {
 export function createNextId(list = []) {
   return Math.max(...list.map((item) => item.id)) + 1;
 }
+
+export function emit(target, eventName, detail) {
+  const event = new CustomEvent(eventName, { detail });
+  target.dispatchEvent(event);
+}
