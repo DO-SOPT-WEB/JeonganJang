@@ -10,7 +10,7 @@ export default class MyAccountView extends View {
     this.plusAmount = qs(".amount_detail_plus", this.element);
     this.minusAmount = qs(".amount_detail_minus", this.element);
     this.totalMyAccount(storage.HISTORY_LIST);
-    this.detailPlus(storage.HISTORY_LIST);
+    this.detailPlusAndMinus(storage.HISTORY_LIST);
   }
 
   calculateAccount(items) {
@@ -40,7 +40,7 @@ export default class MyAccountView extends View {
   `;
   }
 
-  detailPlus(items) {
+  detailPlusAndMinus(items) {
     const { totalIncome, totalSpend } = this.calculateAccount(items);
 
     const plusAccount = qs(".amount_detail_container");
