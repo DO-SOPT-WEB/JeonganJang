@@ -13,13 +13,9 @@ export default class MyAccountView extends View {
     this.detailPlus(storage.HISTORY_LIST);
   }
 
-  totalMyAccount(items) {
+  calculateAccount(items) {
     let totalIncome = 0;
     let totalSpend = 0;
-
-    const myAmount = qs(".my_amount");
-    const p = document.createElement("p");
-    p.className = "my_amount_sub";
 
     items.forEach((item) => {
       if (item.SPEND_OR_INCOME === "income") {
@@ -28,6 +24,15 @@ export default class MyAccountView extends View {
         totalSpend += item.PRICE;
       }
     });
+
+    return { totalIncome, totalSpend };
+  }
+
+  totalMyAccount(items) {
+    const { totalIncome, totalSpend } = this.calculateAccount(items);
+    const myAmount = qs(".my_amount");
+    const p = document.createElement("p");
+    p.className = "my_amount_sub";
 
     myAmount.innerHTML = `
   <p class="my_amount_title">나의 자산</p>
@@ -36,18 +41,10 @@ export default class MyAccountView extends View {
   }
 
   detailPlus(items) {
-    let totalIncome = 0;
-    let totalSpend = 0;
+    const { totalIncome, totalSpend } = this.calculateAccount(items);
 
     const plusAccount = qs(".amount_detail_container");
 
-    items.forEach((item) => {
-      if (item.SPEND_OR_INCOME === "income") {
-        totalIncome += item.PRICE;
-      } else if (item.SPEND_OR_INCOME === "spend") {
-        totalSpend += item.PRICE;
-      }
-    });
     plusAccount.innerHTML = `
     <div class="amount_detail_plus_container">
               <p class="amount_detail_plus">+</p>
