@@ -3,10 +3,9 @@ import { storage } from "./Storage.js";
 import Store from "./Store.js";
 import FilterView from "./views/FilterView.js";
 import { firstRender } from "./views/FirstRender.js";
-// import HistoryListView from "./views/HistoryListView.js";
+import MyAccountView from "./views/MyAccountView.js";
 
 const tag = "[main]";
-console.log("main.js load");
 
 document.addEventListener("DOMContentLoaded", main);
 
@@ -18,6 +17,7 @@ function main() {
   const views = {
     // historyListView: new HistoryListView(),
     filterView: new FilterView(),
+    myAccountView: new MyAccountView(),
   };
 
   new Controller(store, views);
