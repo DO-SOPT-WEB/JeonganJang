@@ -15,7 +15,11 @@ export function firstRender(items) {
     const li = document.createElement("li");
 
     const amountString =
-      item.SPEND_OR_INCOME === "income" ? `+${item.PRICE}` : `-${item.PRICE}`;
+      item.SPEND_OR_INCOME === "income"
+        ? `+${item.PRICE.toLocaleString()}`
+        : `-${item.PRICE.toLocaleString()}`;
+
+    //  const amountString = item.SPEND_OR_INCOME === "income" ? `+${item.PRICE}` : `-${item.PRICE}`;
 
     li.innerHTML = `
         <p class="pay_detail_category">${item.CATEGORY}</p>

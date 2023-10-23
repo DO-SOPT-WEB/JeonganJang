@@ -45,9 +45,9 @@ export default class MyAccountView extends View {
 
     myAmount.innerHTML = `
   <p class="my_amount_title">나의 자산</p>
-<p class="my_amount_sub">${totalIncome - totalSpend}</p>
+<p class="my_amount_sub">${(totalIncome - totalSpend).toLocaleString()}</p>
   `;
-  }
+  } //TODO 하나하나 toLocaleString()를 붙이는 방법 말고 하나의 유틸로써 작성하는 방법을 찾아보자
 
   detailPlusAndMinus(items) {
     const { totalIncome, totalSpend } = this.calculateAccount(items);
@@ -57,11 +57,11 @@ export default class MyAccountView extends View {
     plusAccount.innerHTML = `
     <div class="amount_detail_plus_container">
               <p class="amount_detail_plus">+</p>
-              <p class="amount_detail_plus">${totalIncome}</p> 
+              <p class="amount_detail_plus">${totalIncome.toLocaleString()}</p> 
             </div>
             <div class="amount_detail_minus_container">
               <p class="amount_detail_minus">-</p>
-              <p class="amount_detail_minus">${totalSpend}</p> 
+              <p class="amount_detail_minus">${totalSpend.toLocaleString()}</p> 
             </div>
     `;
   }
