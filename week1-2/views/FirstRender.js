@@ -1,5 +1,6 @@
-import { emit, qs, qsAll } from "../util/domHelper.js";
+import { emit, on, qs, qsAll } from "../util/domHelper.js";
 import ModalView from "./ModalView.js";
+
 const modalInstance = new ModalView();
 
 export function firstRender(items) {
@@ -33,7 +34,7 @@ export function firstRender(items) {
     //TODO 삭제 기능도 추후 따로 분리하는게 좋으려나?
     const deleteBtn = qs(".pay_detail_btn", ul);
 
-    deleteBtn.addEventListener("click", () => {
+    on(deleteBtn, "click", () => {
       modalInstance.show(() => {
         const index = items.findIndex((i) => i.id === item.id);
         if (index !== -1) {
