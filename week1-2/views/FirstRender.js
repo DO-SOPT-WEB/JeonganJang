@@ -1,4 +1,5 @@
-import { emit, on, qs, qsAll } from "../util/domHelper.js";
+import { eventController } from "../EventController.js";
+import { on, qs } from "../util/domHelper.js";
 import ModalView from "./ModalView.js";
 
 const modalInstance = new ModalView();
@@ -41,6 +42,8 @@ export function firstRender(items) {
           items.splice(index, 1);
           li.remove();
           modalInstance.hide();
+          eventController.emit("updatedList", items); //MyAccountView에서 발행한 이벤트 수신
+          console.log("이벤트수신", items);
         } else {
           console.error("삭제할 지출 내역을 찾을 수 없습니다.");
         }

@@ -1,3 +1,4 @@
+import { eventController } from "../EventController.js";
 import { storage } from "../Storage.js";
 import { qs } from "../util/domHelper.js";
 import View from "./View.js";
@@ -9,8 +10,16 @@ export default class MyAccountView extends View {
     super(qs(".all_my_amount"));
     this.plusAmount = qs(".amount_detail_plus", this.element);
     this.minusAmount = qs(".amount_detail_minus", this.element);
+
     this.totalMyAccount(storage.HISTORY_LIST);
     this.detailPlusAndMinus(storage.HISTORY_LIST);
+
+    //이벤트 발행(firstRender함수의 on메서드에서 이벤트 수신)
+    eventController.subscribe("updatedList", (updatedList) => {
+      console.log("이벤트발행", updatedList);
+      this.totalMyAccount(updatedList);
+      this.detailPlusAndMinus(updatedList);
+    });
   }
 
   calculateAccount(items) {
