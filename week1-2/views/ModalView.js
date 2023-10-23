@@ -28,11 +28,11 @@ export default class ModalView {
   }
 
   //TODO 모달창 관련 로직 추후 컨트롤러로 분리
-  show(action) {
+  show(callback) {
     this.modal.style.display = "block";
     const confirmBtn = qs("#confirmDelete", this.modal);
     confirmBtn.onclick = () => {
-      action();
+      callback();
     };
 
     const refuseAction = () => this.hide();
