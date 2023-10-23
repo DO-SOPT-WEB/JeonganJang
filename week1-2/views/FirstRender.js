@@ -1,19 +1,21 @@
-import { qs } from "../util/domHelper.js";
+import { emit, qs, qsAll } from "../util/domHelper.js";
+import ModalView from "./ModalView.js";
+const modalInstance = new ModalView();
 
 export function firstRender(items) {
-  const container = qs(".pay_detail_contents");
-  container.innerHTML = "";
+  const div = qs(".pay_detail_contents");
+  div.innerHTML = "";
 
-  items.forEach((item, index) => {
-    const itemList = document.createElement("ul");
-    itemList.className = "pay_detail_item";
+  items.forEach((item) => {
+    const ul = document.createElement("ul");
+    ul.className = "pay_detail_item";
 
-    const listItem = document.createElement("li");
+    const li = document.createElement("li");
 
     const amountString =
       item.SPEND_OR_INCOME === "income" ? `+${item.PRICE}` : `-${item.PRICE}`;
 
-    listItem.innerHTML = `
+    li.innerHTML = `
         <p class="pay_detail_category">${item.CATEGORY}</p>
         <p class="pay_detail_content">${item.PLACE}</p>
         <p class="${
@@ -22,10 +24,26 @@ export function firstRender(items) {
             : "pay_detail_amount_spend"
         }">${amountString}</p>
         <button class="pay_detail_btn">x</button>
-      `;
+        `;
 
-    itemList.appendChild(listItem);
+    ul.appendChild(li);
+    div.appendChild(ul);
 
-    container.appendChild(itemList);
+    //지출 내역 리스트 삭제
+    //TODO 삭제 기능도 추후 따로 분리하는게 좋으려나?
+    const deleteBtn = qs(".pay_detail_btn", ul);
+
+    deleteBtn.addEventListener("click", () => {
+      modalInstance.show(() => {
+        const index = items.findIndex((i) => i.id === item.id);
+        if (index !== -1) {
+          items.splice(index, 1);
+          li.remove();
+          modalInstance.hide();
+        } else {
+          console.error("삭제할 지출 내역을 찾을 수 없습니다.");
+        }
+      });
+    });
   });
 }
