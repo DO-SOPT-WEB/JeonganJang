@@ -102,6 +102,7 @@
   text-align: center;
   z-index: 200;
   top: 50%;
+  margin-bottom: 10px;
 }
 
 .food-item:hover .image-description {
@@ -115,6 +116,14 @@
 .food-item:hover .food_image {
   transform: scale(1.1);
   filter: brightness(0.7);
+}
+
+.read-more {
+  display: none;
+}
+
+.image-container:hover .read-more {
+  display: block;
 }
 
 /* 첫 번째 섹션 좌우 스크롤 버튼 */
@@ -237,7 +246,6 @@
 }
 
 #scrollTopBtn {
-  display: none;
   position: fixed;
   bottom: 20px;
   right: 30px;
