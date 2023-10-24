@@ -19,8 +19,6 @@ export function firstRender(items) {
         ? `+${item.PRICE.toLocaleString()}`
         : `-${item.PRICE.toLocaleString()}`;
 
-    //  const amountString = item.SPEND_OR_INCOME === "income" ? `+${item.PRICE}` : `-${item.PRICE}`;
-
     li.innerHTML = `
         <p class="pay_detail_category">${item.CATEGORY}</p>
         <p class="pay_detail_content">${item.PLACE}</p>

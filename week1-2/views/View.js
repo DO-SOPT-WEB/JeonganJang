@@ -8,7 +8,7 @@ export default class View {
     if (!element) throw "no element";
 
     this.element = element;
-
+    console.log("View This", this);
     return this;
   }
 
@@ -16,6 +16,4 @@ export default class View {
     on(this.element, eventName, handler);
     return this;
   }
-
-  //삭제, 추가 로직 추가 TODO
 }
