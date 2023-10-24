@@ -1,9 +1,10 @@
-import { qs } from "../util/domHelper.js";
+import { on, qs } from "../util/domHelper.js";
 
 const tag = "[ModalView]";
 export default class ModalView {
   constructor() {
     this.modal = this.createModal();
+    console.log(tag, "[ModalView]");
   }
 
   createModal() {
@@ -20,9 +21,7 @@ export default class ModalView {
     modal.style.display = "none";
     document.body.appendChild(modal);
 
-    modal.querySelector(".close-button").addEventListener("click", () => {
-      this.hide();
-    });
+    on(qs(".close-button", modal), "click", () => this.hide());
 
     return modal;
   }
