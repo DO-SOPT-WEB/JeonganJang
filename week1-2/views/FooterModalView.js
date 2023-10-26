@@ -145,4 +145,13 @@ export default class FooterModalView {
       }
     });
   }
+
+  // 유효성 검사
+  validateAmountInput(event) {
+    const input = event.target.value;
+
+    if (isNaN(input)) {
+      alert("금액은 숫자만 입력해주세요.");
+    }
+  }
 }
