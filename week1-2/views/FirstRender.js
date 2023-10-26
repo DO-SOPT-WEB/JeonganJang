@@ -1,4 +1,5 @@
 import { eventController } from "../EventController.js";
+import { storage } from "../Storage.js";
 import { on, qs } from "../util/domHelper.js";
 import ModalView from "./ModalView.js";
 
@@ -53,3 +54,14 @@ export function firstRender(items) {
     });
   });
 }
+firstRender(storage.HISTORY_LIST);
+
+function setupEventListeners() {
+  eventController.subscribe("addData", (newData) => {
+    storage.HISTORY_LIST.push(newData);
+    firstRender(storage.HISTORY_LIST);
+    eventController.emit("updatedList", storage.HISTORY_LIST);
+  });
+}
+
+setupEventListeners();

@@ -67,7 +67,7 @@ export default class FooterModalView {
     on(amountInput, "input", this.validateAmountInput);
 
     const saveButton = qs("#saveButton", this.modal);
-    on(saveButton, "click", () => this.saveTransaction());
+    on(saveButton, "click", () => this.saveClickAction());
 
     const closeButton = qs("#closeButton", this.modal);
     on(closeButton, "click", () => this.closeModal());
@@ -153,5 +153,31 @@ export default class FooterModalView {
     if (isNaN(input)) {
       alert("금액은 숫자만 입력해주세요.");
     }
+  }
+
+  saveClickAction() {
+    const amount = parseInt(qs("#amount", this.modal).value.trim(), 10);
+    const content = qs("#content", this.modal).value.trim();
+    const category = qs("#category", this.modal).value;
+    const isIncome = qs("#incomeCheckbox", this.modal).checked;
+
+    if (!amount || !content) {
+      alert("모든 정보를 입력해주세요.");
+      return;
+    }
+
+    // 새로운 HISTORY_LIST
+    const newData = {
+      id: Date.now(),
+      CATEGORY: category,
+      PLACE: content,
+      SPEND_OR_INCOME: isIncome ? "income" : "spend",
+      PRICE: amount,
+    };
+
+    eventController.emit("addData", newData);
+
+    alert("저장되었습니다!");
+    this.closeModal();
   }
 }
