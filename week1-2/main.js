@@ -15,14 +15,15 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
   console.log(tag, "main");
   firstRender(storage.HISTORY_LIST);
+
   const store = new Store(storage);
 
   const views = {
     filterView: new FilterView(),
     myAccountView: new MyAccountView(),
     modalView: new ModalView(),
-    footerModalView: new FooterModalView(),
-    newCategoryView: new NewCategoryView(),
+    footerModalView: new FooterModalView(store),
+    newCategoryView: new NewCategoryView(store),
   };
 
   new Controller(store, views);
