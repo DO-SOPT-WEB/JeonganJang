@@ -1,6 +1,8 @@
 const tag = "[FooterModalView]";
 import { eventController } from "../EventController.js";
+import { categories } from "../Storage.js";
 import { on, qs } from "../util/domHelper.js";
+
 export default class FooterModalView {
   constructor() {
     this.modal = null;
@@ -89,11 +91,6 @@ export default class FooterModalView {
     const categorySelect = qs("#category", this.modal);
 
     const setCategoryOptions = (type) => {
-      const categories = {
-        income: ["용돈", "월급"],
-        expense: ["쇼핑", "취미"],
-      };
-
       categorySelect.innerHTML = "";
 
       const options = categories[type];

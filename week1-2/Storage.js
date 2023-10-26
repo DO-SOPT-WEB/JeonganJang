@@ -40,4 +40,9 @@ const storage = {
   ],
 };
 
-export { storage, INIT_BALANCE };
+const categories = {
+  income: ["용돈", "월급"],
+  expense: ["쇼핑", "취미"],
+};
+
+export { storage, INIT_BALANCE, categories };
