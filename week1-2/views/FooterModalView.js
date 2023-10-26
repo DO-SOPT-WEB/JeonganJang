@@ -4,10 +4,11 @@ import { categories } from "../Storage.js";
 import { on, qs } from "../util/domHelper.js";
 
 export default class FooterModalView {
-  constructor() {
+  constructor(store) {
     this.modal = null;
     console.log(tag, "[FooterModalView]");
     this.OpenModalButton();
+    this.store = store;
   }
 
   createModal() {
@@ -66,7 +67,7 @@ export default class FooterModalView {
     document.body.appendChild(this.modal);
 
     const amountInput = qs("#amount", this.modal);
-    on(amountInput, "input", this.validateAmountInput);
+    on(amountInput, "input", (event) => this.koreaCurrency(event));
 
     const saveButton = qs("#saveButton", this.modal);
     on(saveButton, "click", () => this.saveClickAction());
@@ -93,6 +94,7 @@ export default class FooterModalView {
     const setCategoryOptions = (type) => {
       categorySelect.innerHTML = "";
 
+      const categories = this.store.getCategory();
       const options = categories[type];
       options.forEach((option) => {
         const optionElement = document.createElement("option");
@@ -143,17 +145,36 @@ export default class FooterModalView {
     });
   }
 
+  koreaCurrency(event) {
+    let value = event.target.value;
+    value = value.replace(/[^0-9]/g, "");
+
+    const koreaCurrency = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    event.target.value = koreaCurrency;
+  }
+
   // 유효성 검사
   validateAmountInput(event) {
-    const input = event.target.value;
+    const input = event.target;
+    let value = input.value.replace(/,/g, ""); // 콤마 제거
 
-    if (isNaN(input)) {
-      alert("금액은 숫자만 입력해주세요.");
+    // 숫자가 아닌 경우 경고 메시지 출력
+    if (isNaN(value) || value < 0) {
+      alert("금액은 양의 숫자만 입력해주세요.");
+      input.value = ""; // 필드 초기화
+      return;
     }
+
+    // 숫자인 경우 원화 형식으로 변환
+    value = parseInt(value, 10); // 정수로 변환
+    input.value = formatCurrency(value); // 변환된 값을 다시 입력 필드에 설정
   }
 
   saveClickAction() {
-    const amount = parseInt(qs("#amount", this.modal).value.trim(), 10);
+    const amountValue = qs("#amount", this.modal).value.trim();
+    const amount = parseInt(amountValue.replace(/,/g, ""), 10); // 콤마 제거 후 정수로 변환
+
     const content = qs("#content", this.modal).value.trim();
     const category = qs("#category", this.modal).value;
     const isIncome = qs("#incomeCheckbox", this.modal).checked;
@@ -171,7 +192,6 @@ export default class FooterModalView {
       SPEND_OR_INCOME: isIncome ? "income" : "spend",
       PRICE: amount,
     };
-
     eventController.emit("addData", newData);
 
     alert("저장되었습니다!");
