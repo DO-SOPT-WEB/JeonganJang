@@ -16,5 +16,5 @@ export default class EventController {
     }
   }
 }
-
+export const CATEGORY_CHANGED_EVENT = "categoryChanged";
 export const eventController = new EventController();
