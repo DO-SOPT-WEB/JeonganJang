@@ -6,6 +6,7 @@ import { firstRender } from "./views/FirstRender.js";
 import FooterModalView from "./views/FooterModalView.js";
 import ModalView from "./views/ModalView.js";
 import MyAccountView from "./views/MyAccountView.js";
+import NewCategoryView from "./views/newCategoryView.js";
 
 const tag = "[main]";
 
@@ -21,6 +22,7 @@ function main() {
     myAccountView: new MyAccountView(),
     modalView: new ModalView(),
     footerModalView: new FooterModalView(),
+    newCategoryView: new NewCategoryView(),
   };
 
   new Controller(store, views);
