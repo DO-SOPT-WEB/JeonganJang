@@ -136,4 +136,13 @@ export default class FooterModalView {
       });
     }
   }
+
+  //모달 창 밖에 클릭했을 때 닫히는 로직
+  closeModalOverlay() {
+    on(this.modal, "click", (event) => {
+      if (event.target === this.modal) {
+        this.closeModal();
+      }
+    });
+  }
 }
