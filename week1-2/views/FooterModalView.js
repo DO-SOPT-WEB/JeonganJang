@@ -82,4 +82,58 @@ export default class FooterModalView {
       document.body.removeChild(this.modal);
     });
   }
+
+  handleCheckbox(isCheckedIncome = false) {
+    const incomeCheckbox = qs("#incomeCheckbox", this.modal);
+    const expenseCheckbox = qs("#expenseCheckbox", this.modal);
+    const categorySelect = qs("#category", this.modal);
+
+    const setCategoryOptions = (type) => {
+      const categories = {
+        income: ["용돈", "월급"],
+        expense: ["쇼핑", "취미"],
+      };
+
+      categorySelect.innerHTML = "";
+
+      const options = categories[type];
+      options.forEach((option) => {
+        const optionElement = document.createElement("option");
+        optionElement.textContent = option;
+        optionElement.value = option;
+        categorySelect.appendChild(optionElement);
+      });
+    };
+
+    if (isCheckedIncome) {
+      incomeCheckbox.checked = true;
+      setCategoryOptions("income");
+    }
+
+    on(incomeCheckbox, "change", () => {
+      if (incomeCheckbox.checked) {
+        expenseCheckbox.checked = false;
+        setCategoryOptions("income");
+      }
+    });
+
+    on(expenseCheckbox, "change", () => {
+      if (expenseCheckbox.checked) {
+        incomeCheckbox.checked = false;
+        setCategoryOptions("expense");
+      }
+    });
+
+    setCategoryOptions("income");
+  }
+
+  OpenModalButton() {
+    const openModalButton = qs("#openModalButton");
+
+    if (openModalButton) {
+      on(openModalButton, "click", () => {
+        this.createModal();
+      });
+    }
+  }
 }
