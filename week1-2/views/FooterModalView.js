@@ -147,9 +147,14 @@ export default class FooterModalView {
   }
 
   koreaCurrency(event) {
-    const koreaCurrency = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    let value = event.target.value;
+    value = value.replace(/,/g, "");
 
-    event.target.value = koreaCurrency;
+    if (!isNaN(value) && value.trim() !== "") {
+      value = parseInt(value, 10);
+      const koreaCurrency = value.toLocaleString("ko-KR");
+      event.target.value = koreaCurrency;
+    }
   }
 
   // 유효성 검사
