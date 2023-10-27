@@ -14,7 +14,7 @@ export default class ModalView {
           <span class="close-button">x</span>
           <p>정말로 삭제하시겠습니까?</p>
           <button id="confirmDelete">예</button>
-          <button id="cancelDelete">아니오</button>
+          <button id="cancelDelete">취소</button>
         </div>
       `;
     modal.classList.add("modal");
