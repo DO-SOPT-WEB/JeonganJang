@@ -51,7 +51,6 @@ export default class NewCategoryView {
   }
 
   init() {
-    console.log("카테고리뷰 연결 완료!");
     this.showExistCategory();
 
     on(qs("#add_income_category", document), "click", () =>
@@ -60,6 +59,18 @@ export default class NewCategoryView {
     on(qs("#add_expense_category", document), "click", () =>
       this.addNewCategory("expense")
     );
+
+    on(qs("#new_income_category_name", document), "keyup", (event) => {
+      if (event.key === "Enter") {
+        this.addNewCategory("income");
+      }
+    });
+
+    on(qs("#new_expense_category_name", document), "keyup", (event) => {
+      if (event.key === "Enter") {
+        this.addNewCategory("expense");
+      }
+    });
 
     this.closeButton = qs(".close", document);
 
