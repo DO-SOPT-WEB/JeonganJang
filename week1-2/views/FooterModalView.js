@@ -57,10 +57,10 @@ export default class FooterModalView {
 
     <div class="modal-footer">
       <!-- 저장 버튼 -->
-      <button type="button" class="btn btn-primary" id="saveButton">저장하기</button>
+      <button type="button" class="btn-primary" id="saveButton">저장하기</button>
       
       <!-- 모달 닫기 버튼 -->
-      <button type="button" class="btn btn-secondary" id="closeButton">닫기</button>
+      <button type="button" class="btn-secondary" id="closeButton">닫기</button>
     </div>
   </div>
     `;
