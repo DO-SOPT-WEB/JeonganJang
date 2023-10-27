@@ -68,6 +68,7 @@ export default class FooterModalView {
 
     const amountInput = qs("#amount", this.modal);
     on(amountInput, "input", (event) => this.koreaCurrency(event));
+    on(amountInput, "input", (event) => this.validateAmountInput(event));
 
     const saveButton = qs("#saveButton", this.modal);
     on(saveButton, "click", () => this.saveClickAction());
@@ -146,9 +147,6 @@ export default class FooterModalView {
   }
 
   koreaCurrency(event) {
-    let value = event.target.value;
-    value = value.replace(/[^0-9]/g, "");
-
     const koreaCurrency = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     event.target.value = koreaCurrency;
@@ -160,7 +158,7 @@ export default class FooterModalView {
     let value = input.value.replace(/,/g, "");
 
     if (isNaN(value) || value < 0) {
-      alert("금액은 양의 숫자만 입력해주세요.");
+      alert("금액은 숫자만 입력해주세요.");
       input.value = "";
       return;
     }
