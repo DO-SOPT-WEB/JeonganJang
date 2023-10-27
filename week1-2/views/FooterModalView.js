@@ -193,6 +193,5 @@ export default class FooterModalView {
     eventController.emit("addData", newData);
 
     alert("저장되었습니다!");
-    // this.closeModal();
   }
 }
