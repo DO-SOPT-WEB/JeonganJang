@@ -30,13 +30,6 @@ const storage = {
       SPEND_OR_INCOME: "spend",
       PRICE: 70000,
     },
-    {
-      id: 5,
-      CATEGORY: "취미",
-      PLACE: "넷플릭스",
-      SPEND_OR_INCOME: "spend",
-      PRICE: 4000,
-    },
   ],
 };
 

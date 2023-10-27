@@ -157,18 +157,16 @@ export default class FooterModalView {
   // 유효성 검사
   validateAmountInput(event) {
     const input = event.target;
-    let value = input.value.replace(/,/g, ""); // 콤마 제거
+    let value = input.value.replace(/,/g, "");
 
-    // 숫자가 아닌 경우 경고 메시지 출력
     if (isNaN(value) || value < 0) {
       alert("금액은 양의 숫자만 입력해주세요.");
-      input.value = ""; // 필드 초기화
+      input.value = "";
       return;
     }
 
-    // 숫자인 경우 원화 형식으로 변환
-    value = parseInt(value, 10); // 정수로 변환
-    input.value = formatCurrency(value); // 변환된 값을 다시 입력 필드에 설정
+    value = parseInt(value, 10);
+    input.value = koreaCurrency(value);
   }
 
   saveClickAction() {
@@ -195,6 +193,6 @@ export default class FooterModalView {
     eventController.emit("addData", newData);
 
     alert("저장되었습니다!");
-    this.closeModal();
+    // this.closeModal();
   }
 }
