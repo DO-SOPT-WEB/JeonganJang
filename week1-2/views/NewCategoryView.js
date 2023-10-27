@@ -68,6 +68,45 @@ export default class NewCategoryView {
     });
   }
 
+  addNewCategory(type) {
+    const inputId =
+      type === "income"
+        ? "#new_income_category_name"
+        : "#new_expense_category_name";
+    const newCategory = qs(inputId).value.trim();
+
+    if (newCategory) {
+      this.store.addCategory(type, newCategory);
+      eventController.emit(CATEGORY_CHANGED_EVENT, { type, newCategory });
+      qs(inputId).value = "";
+      this.showExistCategory();
+    }
+  }
+
+  showExistCategory() {
+    const container = qs("#existing_categories");
+    console.log("container", container);
+    const storeCategories = this.store.getCategory();
+
+    const existCategory = Object.entries(storeCategories)
+      .map((category) => {
+        const categoryType = category[0];
+        const categoryList = category[1];
+        const categoryKey = categoryType === "income" ? "수입" : "지출";
+
+        const categoryValue = categoryList
+          .map((category) => `<li>${category}</li>`)
+          .join("");
+
+        return `
+          <h4>${categoryKey}</h4>
+          <ul>${categoryValue}</ul>
+        `;
+      })
+      .join("");
+
+    container.innerHTML = existCategory;
+  }
   hide() {
     const currentPage = qs("#main_content", document);
     currentPage.style.display = "none";
