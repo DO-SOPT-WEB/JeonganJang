@@ -181,6 +181,7 @@ export default class FooterModalView {
     const isIncome = qs("#incomeCheckbox", this.modal).checked;
 
     if (!amount || !content) {
+      //TODO 카테고리 추가
       alert("모든 정보를 입력해주세요.");
       return;
     }
