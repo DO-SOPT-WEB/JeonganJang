@@ -65,7 +65,10 @@ export default class FooterModalView {
   </div>
     `;
     document.body.appendChild(this.modal);
+    this.controller();
+  }
 
+  controller() {
     const amountInput = qs("#amount", this.modal);
     on(amountInput, "input", (event) => this.koreaCurrency(event));
     on(amountInput, "input", (event) => this.validateAmountInput(event));
