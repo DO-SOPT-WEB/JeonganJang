@@ -34,27 +34,9 @@ export function firstRender(items) {
     ul.appendChild(li);
     div.appendChild(ul);
 
-    //지출 내역 리스트 삭제
-    //TODO 삭제 기능도 추후 따로 분리하는게 좋으려나?
-    const deleteBtn = qs(".pay_detail_btn", ul);
-
-    on(deleteBtn, "click", () => {
-      modalInstance.show(() => {
-        const index = items.findIndex((i) => i.id === item.id);
-        if (index !== -1) {
-          items.splice(index, 1);
-          li.remove();
-          modalInstance.hide();
-          eventController.emit("updatedList", items); //MyAccountView에서 발행한 이벤트 수신
-          console.log("이벤트수신", items);
-        } else {
-          console.error("삭제할 지출 내역을 찾을 수 없습니다.");
-        }
-      });
-    });
+    deleteHistoryList(ul, item, items, li);
   });
 }
-firstRender(storage.HISTORY_LIST);
 
 function setupEventListeners() {
   eventController.subscribe("addData", (newData) => {
@@ -63,5 +45,25 @@ function setupEventListeners() {
     eventController.emit("updatedList", storage.HISTORY_LIST);
   });
 }
+
+function deleteHistoryList(ul, item, items, li) {
+  const deleteBtn = qs(".pay_detail_btn", ul);
+
+  on(deleteBtn, "click", () => {
+    modalInstance.show(() => {
+      const index = items.findIndex((i) => i.id === item.id);
+      if (index !== -1) {
+        items.splice(index, 1);
+        li.remove();
+        modalInstance.hide();
+        eventController.emit("updatedList", items); //MyAccountView에서 발행한 이벤트 수신
+        console.log("이벤트수신", items);
+      } else {
+        console.error("삭제할 지출 내역을 찾을 수 없습니다.");
+      }
+    });
+  });
+}
+firstRender(storage.HISTORY_LIST);
 
 setupEventListeners();
