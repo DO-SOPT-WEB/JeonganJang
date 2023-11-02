@@ -1,11 +1,8 @@
 import { CATEGORY_CHANGED_EVENT, eventController } from "../EventController.js";
 import { qs, on } from "../util/domHelper.js";
 
-const tag = "[NewCategoryView]";
-
 export default class NewCategoryView {
   constructor(store) {
-    console.log(tag, "[NewCategoryView]");
     this.store = store;
     this.navigateToNewCategoryPage();
   }
@@ -96,7 +93,6 @@ export default class NewCategoryView {
 
   showExistCategory() {
     const container = qs("#existing_categories");
-    console.log("container", container);
     const storeCategories = this.store.getCategory();
 
     const existCategory = Object.entries(storeCategories)

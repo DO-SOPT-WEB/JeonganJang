@@ -8,12 +8,9 @@ import ModalView from "./views/ModalView.js";
 import MyAccountView from "./views/MyAccountView.js";
 import NewCategoryView from "./views/newCategoryView.js";
 
-const tag = "[main]";
-
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
-  console.log(tag, "main");
   firstRender(storage.HISTORY_LIST);
 
   const store = new Store(storage);

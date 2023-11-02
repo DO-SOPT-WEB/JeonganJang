@@ -57,7 +57,6 @@ function deleteHistoryList(ul, item, items, li) {
         li.remove();
         modalInstance.hide();
         eventController.emit("updatedList", items); //MyAccountView에서 발행한 이벤트 수신
-        console.log("이벤트수신", items);
       } else {
         console.error("삭제할 지출 내역을 찾을 수 없습니다.");
       }

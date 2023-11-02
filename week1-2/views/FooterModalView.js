@@ -1,4 +1,3 @@
-const tag = "[FooterModalView]";
 import { eventController } from "../EventController.js";
 import { categories } from "../Storage.js";
 import { on, qs } from "../util/domHelper.js";
@@ -6,7 +5,6 @@ import { on, qs } from "../util/domHelper.js";
 export default class FooterModalView {
   constructor(store) {
     this.modal = null;
-    console.log(tag, "[FooterModalView]");
     this.OpenModalButton();
     this.store = store;
   }

@@ -3,10 +3,8 @@ import { on, qs } from "../util/domHelper.js";
 import { firstRender } from "./FirstRender.js";
 import View from "./View.js";
 
-const tag = "[FilterView]";
 export default class FilterView extends View {
   constructor() {
-    console.log(tag, "[FilterView]");
     super(qs("#filter_view"));
     this.incomeElement = qs("[name=income]", this.element);
     this.spendElement = qs("[name=spend]", this.element);

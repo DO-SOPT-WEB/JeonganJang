@@ -1,10 +1,8 @@
 import { on, qs } from "../util/domHelper.js";
 
-const tag = "[ModalView]";
 export default class ModalView {
   constructor() {
     this.modal = this.createModal();
-    console.log(tag, "[ModalView]");
   }
 
   createModal() {
@@ -26,7 +24,6 @@ export default class ModalView {
     return modal;
   }
 
-  //TODO 모달창 관련 로직 추후 컨트롤러로 분리
   show(callback) {
     this.modal.style.display = "block";
     const confirmBtn = qs("#confirmDelete", this.modal);

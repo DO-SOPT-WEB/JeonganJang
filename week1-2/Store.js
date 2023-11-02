@@ -2,10 +2,8 @@ const tag = "[Store]";
 
 export default class Store {
   constructor(storage) {
-    console.log(tag, "store");
     if (!storage) throw "no storage";
     this.storage = storage;
-    console.log("store.js 내 this.storage", this.storage.HISTORY_LIST);
   }
 
   getCategory() {
