@@ -2,7 +2,7 @@ import styled, { ThemeProvider } from "styled-components";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import { theme } from "./styles/theme";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1); // 1: 첫 화면, 2: 카테고리 선택, 3: 세부 카테고리 선택, 4: 국물 선택, 5: 최종 추천
@@ -12,26 +12,26 @@ function App() {
   const [finalRecommendation, setFinalRecommendation] = useState("");
   const [recommendationType, setRecommendationType] = useState(null); // 'preference' 또는 'random'
 
-  const resetSelections = () => {
+  const resetSelections = useCallback(() => {
     setSelectedCuisine("");
     setSelectedType("");
     setSelectedOption("");
     setFinalRecommendation("");
-  };
+  }, []);
 
-  const handleRestart = () => {
+  const handleRestart = useCallback(() => {
     if (recommendationType === "preference") {
       resetSelections();
     }
     setCurrentStep(1);
-  };
+  }, [recommendationType, resetSelections]);
 
   const allReset = () => {
     setSelectedCuisine("");
     setSelectedType("");
     setSelectedOption("");
     setFinalRecommendation("");
-    setRecommendationType(null);
+    setRecommendationType(null); //처음으로 버튼 클릭 시 모든 선택이 리셋되어야 하므로 얘 추가
   };
 
   const clickResetBtn = () => {
