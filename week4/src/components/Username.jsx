@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { signupURL } from "../api/api";
 
-const Username = ({ username, setUsername, setIsValidID }) => {
+const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
   const handleIdChange = (e) => {
     const newUsername = e.target.value;
     setUsername(newUsername);
@@ -9,10 +10,16 @@ const Username = ({ username, setUsername, setIsValidID }) => {
 
   const checkDuplicate = async () => {
     try {
-      const response = await axios.get(`/api/v1/members/${username}`);
+      const response = await axios.get(`${signupURL}/api/v1/members/check`, {
+        params: {
+          username: username,
+        },
+      });
+
       if (response.status === 200) {
-        setIsValidID(false);
-        console.log("중복검사 통과");
+        const { isExist } = response.data;
+        setIsValidID(!isExist);
+        console.log("중복검사 통과", response.data);
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -21,6 +28,16 @@ const Username = ({ username, setUsername, setIsValidID }) => {
       } else {
         console.error(error);
       }
+    }
+  };
+
+  const duplicateBtnColor = () => {
+    if (!isValidId) {
+      return "black";
+    } else if (isValidId) {
+      return "green";
+    } else {
+      return "red";
     }
   };
 
@@ -39,7 +56,12 @@ const Username = ({ username, setUsername, setIsValidID }) => {
         onChange={handleIdChange}
         placeholder="소문자, 숫자 조합 6-20자"
       />
-      <button type="button" className="inputBtn" onClick={checkDuplicate}>
+      <button
+        type="button"
+        className="inputBtn"
+        onClick={checkDuplicate}
+        style={{ backgroundColor: duplicateBtnColor() }}
+      >
         중복검사
       </button>
     </div>
