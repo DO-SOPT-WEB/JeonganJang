@@ -12,7 +12,7 @@ const Nickname = ({ nickname, setNickname }) => {
         type="text"
         id="nickname"
         className="inputBox"
-        // value={username}
+        value={nickname}
         minLength={6}
         maxLength={20}
         onChange={handleNicknameChange}
