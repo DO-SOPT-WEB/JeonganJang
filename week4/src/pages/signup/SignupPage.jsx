@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const SignupPage = () => {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
-  const [isValidID, setIsValidID] = useState(true);
+  const [isValidID, setIsValidID] = useState(null);
   const [password, setPassword] = useState("");
   const [isValidPW, setIsValidPW] = useState(true);
   const [pwCheck, setPWcheck] = useState("");
@@ -40,7 +40,7 @@ const SignupPage = () => {
 
     try {
       const response = await axios.post(
-        `${signupURL}/api/v1/members/sign-in`,
+        `${signupURL}/api/v1/members`,
         userData
       );
       console.log("회원가입 성공", response.data);
@@ -59,6 +59,7 @@ const SignupPage = () => {
             <Username
               username={username}
               setUsername={setUsername}
+              isValidId={isValidID}
               setIsValidID={setIsValidID}
             />
 
@@ -73,12 +74,14 @@ const SignupPage = () => {
               setPwConfirm={setPwConfirm}
             />
 
-            <Nickname />
+            <Nickname nickname={nickname} setNickname={setNickname} />
 
             <button
               type="submit"
               className="button"
-              disabled={!isValidID || !isValidPW || !pwConfirm}
+              disabled={
+                !username || !password || !nickname || isValidID === null
+              }
             >
               가입하기
             </button>
