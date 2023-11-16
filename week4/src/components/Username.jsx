@@ -19,8 +19,6 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
       if (response.status === 200) {
         const { isExist } = response.data;
         setIsValidID(!isExist);
-        console.log("중복검사 통과", response.data);
-        console.log(isValidId, "isValidId");
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -33,14 +31,14 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
   };
 
   const duplicateBtnColor = () => {
-    if (!isValidId) {
-      console.log(!isValidId, "첫번재");
-      return "black";
-    } else if (isValidId) {
-      console.log(isValidId, "두번째");
+    if (isValidId === false) {
+      // 중복 검사 통과하지 못했을 때
+      return "red";
+    } else if (isValidId === true) {
+      // 중복 검사 통과했을 때
       return "green";
     } else {
-      return "red";
+      return "black";
     }
   };
 
@@ -63,7 +61,7 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
         type="button"
         className="inputBtn"
         onClick={checkDuplicate}
-        style={{ backgroundColor: duplicateBtnColor() }}
+        style={{ backgroundColor: duplicateBtnColor(), color: "white" }}
       >
         중복검사
       </button>
