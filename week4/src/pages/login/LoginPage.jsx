@@ -1,28 +1,60 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { signupURL } from "../../api/api";
 
 const LoginPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const moveSignupPage = () => {
-    navigate("/signup");
+  const handleIdChange = (e) => {
+    setUsername(e.target.value);
   };
 
-  const handleLoginBtn = () => {
-    navigate("/mypage/:userId");
+  const handlePwChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // 폼 제출 시 페이지 리로드 방지
+
+    const userData = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        `${signupURL}/api/v1/members/sign-in`,
+        userData
+      );
+      console.log("로그인 성공", response.data);
+      navigate(`/mypage/${response.data.id}`);
+    } catch (error) {
+      console.error("로그인 실패", error);
+    }
   };
 
   return (
     <LoginContainer>
       <LoginTitle>Login</LoginTitle>
-      <LoginForm>
+      <LoginForm onSubmit={handleLogin}>
         <Label>ID</Label>
-        <Input type="text" placeholder="아이디를 입력해주세요." />
+        <Input
+          type="text"
+          placeholder="아이디를 입력해주세요."
+          onChange={handleIdChange}
+        />
         <Label>PASSWORD</Label>
-        <Input type="password" placeholder="비밀번호를 입력해주세요." />
-        <LoginButton onSubmit={handleLoginBtn}>로그인</LoginButton>
-        <SignupLink onClick={moveSignupPage}>회원가입</SignupLink>
+        <Input
+          type="password"
+          placeholder="비밀번호를 입력해주세요."
+          onChange={handlePwChange}
+        />
+        <LoginButton type="submit">로그인</LoginButton>
+        <SignupLink onClick={() => navigate("/signup")}>회원가입</SignupLink>
       </LoginForm>
     </LoginContainer>
   );
