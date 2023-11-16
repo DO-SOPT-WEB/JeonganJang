@@ -17,18 +17,6 @@ const SignupPage = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   postData();
-  // }, []);
-
-  // const postData = async () => {
-  //   const response = await axios
-  //     .post(`${signupURL}/api/v1/members/sign-in`, {})
-  //     .then((res) => {
-  //       console.log(res);
-  //     });
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -51,7 +39,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="join container">
+    <div className="container">
       <div className="contents">
         <h2 className="title">회원가입</h2>
         <div className="form_warp">
