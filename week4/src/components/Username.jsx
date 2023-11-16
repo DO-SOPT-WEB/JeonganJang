@@ -20,6 +20,7 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
         const { isExist } = response.data;
         setIsValidID(!isExist);
         console.log("중복검사 통과", response.data);
+        console.log(isValidId, "isValidId");
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -33,8 +34,10 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
 
   const duplicateBtnColor = () => {
     if (!isValidId) {
+      console.log(!isValidId, "첫번재");
       return "black";
     } else if (isValidId) {
+      console.log(isValidId, "두번째");
       return "green";
     } else {
       return "red";
