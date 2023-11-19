@@ -68,21 +68,6 @@
   color: red;
   font-size: 0.7rem;
 }
-.email_row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.agreeCheck {
-  display: flex;
-  align-items: center;
-}
-#agree {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
 
 .button {
   width: 100%;
