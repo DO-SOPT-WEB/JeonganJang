@@ -1,6 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { signupURL } from "../api/api";
+import api from "../api/api";
 
 const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
   const handleIdChange = (e) => {
@@ -10,7 +8,7 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
 
   const checkDuplicate = async () => {
     try {
-      const response = await axios.get(`${signupURL}/api/v1/members/check`, {
+      const response = await api.get(`/api/v1/members/check`, {
         params: {
           username: username,
         },
