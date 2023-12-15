@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { signupURL } from "../../api/api";
 import { createPortal } from "react-dom";
+import api from "../../api/api";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -29,38 +28,43 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await axios.post(
-        `${signupURL}/api/v1/members/sign-in`,
-        userData
-      );
+      const response = await api.post(`/api/v1/members/sign-in`, userData);
       console.log("로그인 성공", response.data);
       navigate(`/mypage/${response.data.id}`);
     } catch (error) {
-      setErrorMessage(error.response.data);
+      setErrorMessage(error.response.data.message);
       console.log("로그인 실패", error);
     }
   };
 
   return (
-    <LoginContainer>
-      <LoginTitle>Login</LoginTitle>
-      <LoginForm onSubmit={handleLogin}>
-        <Label>ID</Label>
-        <Input
-          type="text"
-          placeholder="아이디를 입력해주세요."
-          onChange={handleIdChange}
-        />
-        <Label>PASSWORD</Label>
-        <Input
-          type="password"
-          placeholder="비밀번호를 입력해주세요."
-          onChange={handlePwChange}
-        />
-        <LoginButton type="submit">로그인</LoginButton>
-        <SignupLink onClick={() => navigate("/signup")}>회원가입</SignupLink>
-      </LoginForm>
-    </LoginContainer>
+    <>
+      <LoginContainer>
+        <LoginTitle>Login</LoginTitle>
+        <LoginForm onSubmit={handleLogin}>
+          <Label>ID</Label>
+          <Input
+            type="text"
+            placeholder="아이디를 입력해주세요."
+            onChange={handleIdChange}
+          />
+          <Label>PASSWORD</Label>
+          <Input
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+            onChange={handlePwChange}
+          />
+          <LoginButton type="submit">로그인</LoginButton>
+          <SignupLink onClick={() => navigate("/signup")}>회원가입</SignupLink>
+        </LoginForm>
+      </LoginContainer>
+      {errorMessage
+        ? createPortal(
+            <Toast>{errorMessage}</Toast>,
+            document.getElementById("modal")
+          )
+        : null}
+    </>
   );
 };
 
@@ -111,4 +115,12 @@ const SignupLink = styled.div`
   color: black;
   cursor: pointer;
   text-decoration: underline;
+`;
+
+const Toast = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: pink;
+  z-index: 1;
+  border-radius: 1rem;
 `;
