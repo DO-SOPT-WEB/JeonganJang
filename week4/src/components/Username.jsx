@@ -4,6 +4,7 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
   const handleIdChange = (e) => {
     const newUsername = e.target.value;
     setUsername(newUsername);
+    setIsValidID(null);
   };
 
   const checkDuplicate = async () => {
@@ -19,21 +20,16 @@ const Username = ({ username, setUsername, isValidId, setIsValidID }) => {
         setIsValidID(!isExist);
       }
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        setIsValidID(true);
-        console.log("사용자 존재하지 않음", error);
-      } else {
-        console.error(error);
-      }
+      setIsValidID(true);
+
+      console.error(error);
     }
   };
-
   const duplicateBtnColor = () => {
     if (isValidId === false) {
       // 중복 검사 통과하지 못했을 때
       return "red";
     } else if (isValidId === true) {
-      // 중복 검사 통과했을 때
       return "green";
     } else {
       return "black";
