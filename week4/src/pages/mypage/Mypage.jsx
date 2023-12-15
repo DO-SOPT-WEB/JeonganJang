@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { signupURL } from "../../api/api";
+import api from "../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 
 const Mypage = () => {
   const [userData, setUserData] = useState({
@@ -16,9 +15,7 @@ const Mypage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${signupURL}/api/v1/members/${userId}`
-        );
+        const response = await api.get(`/api/v1/members/${userId}`);
         setUserData(response.data);
       } catch (error) {
         console.log(error);

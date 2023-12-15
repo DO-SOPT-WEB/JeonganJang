@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { signupURL } from "../../api/api";
+import { useState } from "react";
+import api from "../../api/api";
 import Username from "../../components/Username";
 import Password from "../../components/Password";
 import Nickname from "../../components/Nickname";
 import { useNavigate } from "react-router-dom";
+import PasswordCheck from "../../components/PasswordCheck";
 
 const SignupPage = () => {
   const [username, setUsername] = useState("");
@@ -27,15 +27,16 @@ const SignupPage = () => {
     };
 
     try {
-      const response = await axios.post(
-        `${signupURL}/api/v1/members`,
-        userData
-      );
+      const response = await api.post(`/api/v1/members`, userData);
       console.log("회원가입 성공", response.data);
       navigate("/login");
     } catch (error) {
       console.error("회원가입 실패!", error);
     }
+  };
+
+  const handlePwCheckChange = (e) => {
+    setPWcheck(e.target.value);
   };
 
   return (
@@ -62,13 +63,23 @@ const SignupPage = () => {
               setPwConfirm={setPwConfirm}
             />
 
+            <PasswordCheck
+              pwCheck={pwCheck}
+              setPwCheck={setPWcheck}
+              handlePwCheckChange={handlePwCheckChange}
+            />
+
             <Nickname nickname={nickname} setNickname={setNickname} />
 
             <button
               type="submit"
               className="button"
               disabled={
-                !username || !password || !nickname || isValidID === null
+                !username ||
+                !password ||
+                !nickname ||
+                isValidID === null ||
+                password !== pwCheck
               }
             >
               가입하기
