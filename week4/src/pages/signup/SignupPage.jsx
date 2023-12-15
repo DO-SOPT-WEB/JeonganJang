@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { signupURL } from "../../api/api";
 import Username from "../../components/Username";
 import Password from "../../components/Password";
 import Nickname from "../../components/Nickname";
 import { useNavigate } from "react-router-dom";
+import PasswordCheck from "../../components/PasswordCheck";
 
 const SignupPage = () => {
   const [username, setUsername] = useState("");
@@ -38,6 +39,10 @@ const SignupPage = () => {
     }
   };
 
+  const handlePwCheckChange = (e) => {
+    setPWcheck(e.target.value);
+  };
+
   return (
     <div className="container">
       <div className="contents">
@@ -62,13 +67,23 @@ const SignupPage = () => {
               setPwConfirm={setPwConfirm}
             />
 
+            <PasswordCheck
+              pwCheck={pwCheck}
+              setPwCheck={setPWcheck}
+              handlePwCheckChange={handlePwCheckChange}
+            />
+
             <Nickname nickname={nickname} setNickname={setNickname} />
 
             <button
               type="submit"
               className="button"
               disabled={
-                !username || !password || !nickname || isValidID === null
+                !username ||
+                !password ||
+                !nickname ||
+                isValidID === null ||
+                password !== pwCheck
               }
             >
               가입하기
