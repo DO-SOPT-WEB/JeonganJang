@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
 
 const Router = () => (
   <>
-    <RouterProvider router={router} />;
+    <RouterProvider router={router} />
   </>
 );
 
