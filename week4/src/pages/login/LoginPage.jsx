@@ -1,12 +1,15 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { signupURL } from "../../api/api";
+import { createPortal } from "react-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleIdChange = (e) => {
@@ -18,7 +21,7 @@ const LoginPage = () => {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // 폼 제출 시 페이지 리로드 방지
+    e.preventDefault();
 
     const userData = {
       username: username,
@@ -33,7 +36,8 @@ const LoginPage = () => {
       console.log("로그인 성공", response.data);
       navigate(`/mypage/${response.data.id}`);
     } catch (error) {
-      console.error("로그인 실패", error);
+      setErrorMessage(error.response.data);
+      console.log("로그인 실패", error);
     }
   };
 
